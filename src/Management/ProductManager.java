@@ -34,10 +34,12 @@ public class ProductManager implements IManager<Product> {
             productList.remove(id);
     }
 
-//    @Override
-//    public  void display() {
-//
-//    }
+    @Override
+    public  void display() {
+        Iterator<Product> products = productList.iterator();
+        while (products.hasNext())
+            System.out.println(products.next());
+    }
 
     @Override
     public List<Product> findByName(String name) {

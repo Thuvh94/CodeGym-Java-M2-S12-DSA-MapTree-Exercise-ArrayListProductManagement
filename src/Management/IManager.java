@@ -6,7 +6,7 @@ public interface IManager<T> {
     void add(T object);
     void update(int id,T object);
     void delete(int id);
-//    String display();
+    void display();
     List<T> findByName(String name);
     List<T> findAll();
 }
