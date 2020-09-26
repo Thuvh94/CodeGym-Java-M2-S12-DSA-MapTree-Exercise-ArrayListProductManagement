@@ -16,16 +16,19 @@ public class ProductManager implements IManager<Product> {
         productList.add(new Product(5,"Toshiba",24000000));
     }
     @Override
-    //Add: Before adding, check if ID is existed or not.
     public void add(Product newObject) {
-        if(isExisted(newObject.getId()))
+        if(!isExisted(newObject.getId()))
             productList.add(newObject);
+        else
+            System.out.println("Your product is existed.");
     }
 
     @Override
     public void update(int id, Product newObject) {
         if(isExisted(id))
             productList.set((int) (id-1), newObject);
+        else
+            productList.add(newObject);
     }
 
     @Override
@@ -42,10 +45,32 @@ public class ProductManager implements IManager<Product> {
     }
 
     @Override
+    public Product findById(int id) {
+        Product outputProduct = null;
+        for(int i=0;i < productList.size();i++){
+            if(id == productList.get(i).getId()){
+                outputProduct = productList.get(i);
+            }
+        }
+        return outputProduct;
+    }
+
+    @Override
     public List<Product> findByName(String name) {
         List<Product> outputProducts = new ArrayList<>();
         for(Product product: productList){
             if(product.getName().equals(name)){
+                outputProducts.add(product);
+            }
+        }
+        return outputProducts;
+    }
+
+    @Override
+    public List<Product> findByPrice(long price) {
+        List<Product> outputProducts = new ArrayList<>();
+        for(Product product: productList){
+            if(product.getPrice() == price){
                 outputProducts.add(product);
             }
         }
